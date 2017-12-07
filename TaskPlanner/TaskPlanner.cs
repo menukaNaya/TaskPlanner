@@ -71,7 +71,20 @@ namespace TaskPlanner
                 }
             }
 
-            
+           /* if((start.Hour < (int)(workDayStopTime).TotalHours) && (start.Hour > (int)(workDayStartTime).TotalHours))
+            {
+                if (hrs > 0)
+                {
+                    start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(workDayStartTime);
+                }
+
+                if (hrs < 0)
+                {
+                    start = start.AddHours(-(start.Hour + (24 - (int)(workDayStopTime).TotalHours))).AddMinutes(-start.Minute);
+                }
+            }*/
+
+
             //Finding the number of hours and minutes to add to the starting date...
             int min = start.Minute + (int)((totalNumOfHoursForTheTask - Math.Truncate(totalNumOfHoursForTheTask)) * 100);
 
@@ -89,7 +102,7 @@ namespace TaskPlanner
                 if(hrs >= 0)
                 {
                     hrs -= ((int)(workDayStopTime).TotalHours - start.Hour);
-                    
+
                 }
                 else
                 {
@@ -115,21 +128,32 @@ namespace TaskPlanner
                     if (hrs >= 0)
                     {
                         start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(workDayStartTime);
-                        for (int i = 0; i <= hrs / 8; i++)
+                        //Console.WriteLine(start);
+                        start = IsAHoliday(start, hrsAreMinus);
+                        //Console.WriteLine(start);
+
+                        for (int i = 0; i < hrs / 8; i++)
                         {
-                            start = IsAHoliday(start, hrsAreMinus);
-                            start.AddDays(1);
+                            //Console.WriteLine(start);
+                            start = start.AddDays(1);
+                            //if()
+                            //{
+                                start = IsAHoliday(start, hrsAreMinus);
+                            //}
+                            //Console.WriteLine(start);
+
                         }
-                        
                         start = start.AddHours(hrs % 8).AddMinutes(min);
                     }
                     else
                     {
                         start = start.AddHours(-(start.Hour + (24 - (int)(workDayStopTime).TotalHours))).AddMinutes(-start.Minute);
-                        for (int i = 0; i <= hrs / 8; i++)
+                        start = IsAHoliday(start, hrsAreMinus);
+                        for (int i = 0; i < hrs / 8; i++)
                         {
+                            start = start.AddDays(1);
                             start = IsAHoliday(start, hrsAreMinus);
-                            start.AddDays(1);
+
                         }
                         start = start.AddHours(hrs % 8).AddMinutes(min);
                         
@@ -155,65 +179,87 @@ namespace TaskPlanner
             holidays.Add(holiday.Date.ToString("d"));
         }
 
-        public DateTime IsAHoliday(DateTime start, bool hrsAreMinus)
+        public void SetRecurringHoliday(DateTime holiday)
         {
-            while ((start.DayOfWeek == DayOfWeek.Saturday) || (start.DayOfWeek == DayOfWeek.Sunday) || (holidays.Contains(start.Date.ToString("d"))))
+            recHloidays.Add(new RecurringHoiday(holiday.Month,holiday.Day));
+        }
+
+        public DateTime IsAHoliday(DateTime day, bool hrsAreMinus)
+        {
+            while ((day.DayOfWeek == DayOfWeek.Saturday) || (day.DayOfWeek == DayOfWeek.Sunday) || (holidays.Contains(day.Date.ToString("d"))) || IsARecHoliday(day))
             {
                 if (hrsAreMinus)
                 {
-                    start = start.AddHours(-(start.Hour + (24 - (int)(workDayStopTime).TotalHours))).AddMinutes(-start.Minute);
+                    day = day.AddHours(-(day.Hour + (24 - (int)(workDayStopTime).TotalHours))).AddMinutes(-day.Minute);
 
                 }else
                 {
-                    start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(workDayStartTime);
+                    day = day.AddHours(23 - day.Hour).AddMinutes(60 - day.Minute).Add(workDayStartTime);
                 }
             }
 
-            return start;
+            return day;
         }
 
+        public bool IsARecHoliday(DateTime day)
+        {
+            bool isAHoliday = false;
+            foreach (RecurringHoiday recHoliday in recHloidays)
+            {
+                isAHoliday = recHoliday.IsEqual(new RecurringHoiday(day.Month, day.Day));
+            }
+            return isAHoliday;
+        }
+        
         private struct RecurringHoiday
         {
-            private int month;
-            private int date;
+            private int _month;
+            private int _date;
 
             public  RecurringHoiday(int month, int date)
             {
-                this.month = month;
-                this.date = date;
+                this._month = month;
+                this._date = date;
+            }
+            public int Month
+            {
+                get { return this._month; }
             }
 
+            public int Date
+            {
+                get { return this._date; }
+            }
 
+            public bool IsEqual(RecurringHoiday givenDay)
+            {
+                if((this.Month == givenDay.Month) && (this.Date == givenDay.Date))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            
+            }
         }
 
         static void Main(string[] args)
         {
-            DateTime start = new DateTime(2017, 12, 7, 15, 10, 0);
+            DateTime start = new DateTime(2004, 5, 25, 8, 0, 0);
             TimeSpan s = new TimeSpan (8,0,0);
             TimeSpan e = new TimeSpan(16, 0, 0);
 
-            //TaskPlanner taskPlanner = new TaskPlanner();
+            TaskPlanner taskPlanner = new TaskPlanner();
 
-            //taskPlanner.SetHoliday(new DateTime(2017, 12, 8, 0, 0, 0));
-            //taskPlanner.SetHoliday(new DateTime(2004, 5, 24, 0, 0, 0));
-            //taskPlanner.SetHoliday(new DateTime(2004, 5, 27, 0, 0, 0));
+            taskPlanner.SetRecurringHoliday(new DateTime(2004, 5, 17, 0, 0, 0));
+            //taskPlanner.SetRecurringHoliday(new DateTime(2004, 5, 24, 0, 0, 0));
+            taskPlanner.SetHoliday(new DateTime(2004, 5, 27, 0, 0, 0));
 
-            //taskPlanner.SetWorkDayStartAndStop(s,e);
-            //taskPlanner.GetTaskFinishingDate(start, 0.25);
+            taskPlanner.SetWorkDayStartAndStop(s,e);
+            taskPlanner.GetTaskFinishingDate(start, 44.723656);
 
-            /*List<String> holidays = new List<String>();
-            DateTime hol = new DateTime(2017, 12, 8, 0, 0, 0);
-            holidays.Add(hol.Date.ToString("d"));
-
-            while (holidays.Contains(start.Date.ToString("d")))
-            {             
-                   // start = start.AddHours(-(start.Hour + (24 - (int)(e).TotalHours))).AddMinutes(-start.Minute);
-                    start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(s);
-            }*/
-            int h = start.Month;
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(start.Month.ToString() + start.Day.ToString());
-            Console.WriteLine(stringBuilder);
         }
     }
 }
