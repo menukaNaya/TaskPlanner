@@ -1,0 +1,11 @@
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\TaskPlanner.Tests.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\TaskPlanner.Tests.pdb
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\nunit.framework.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\TaskPlanner.exe
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\TaskPlanner.pdb
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\TaskPlanner.exe.config
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\bin\Debug\nunit.framework.xml
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\obj\Debug\TaskPlanner.Tests.csprojResolveAssemblyReference.cache
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\obj\Debug\TaskPlanner.Tests.csproj.CoreCompileInputs.cache
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\obj\Debug\TaskPlanner.Tests.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner.Tests\obj\Debug\TaskPlanner.Tests.pdb

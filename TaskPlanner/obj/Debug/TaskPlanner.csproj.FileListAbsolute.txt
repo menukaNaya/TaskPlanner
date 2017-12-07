@@ -1,0 +1,14 @@
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\TaskPlanner.exe.config
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\TaskPlanner.exe
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\TaskPlanner.pdb
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\obj\Debug\TaskPlanner.csprojResolveAssemblyReference.cache
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\obj\Debug\TaskPlanner.csproj.CoreCompileInputs.cache
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\obj\Debug\TaskPlanner.exe
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\obj\Debug\TaskPlanner.pdb
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\Castle.Core.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\Moq.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\nunit.framework.dll
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\Castle.Core.xml
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\Moq.pdb
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\Moq.xml
+C:\Users\mnw\Desktop\Assignment01\TaskPlanner\TaskPlanner\bin\Debug\nunit.framework.xml
