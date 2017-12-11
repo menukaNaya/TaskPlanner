@@ -130,5 +130,40 @@ namespace TaskPlanner.Tests
 
         }
 
+        [Test]
+        public void GetTaskFinishingDate_WhenWeAddWholeDaysWithOutDecimals_ShouldReturnTheCorrectFinshingDateAndTime()
+        {
+            //If days are adding this should return 4.00 PM..
+
+            // Arrange
+            DateTime startDate = new DateTime(2004, 5, 24, 18, 05, 0);
+            DateTime actualAns = new DateTime(2004, 5, 28, 16, 0, 0);
+
+
+            // Act
+            DateTime result = taskPlanner.GetTaskFinishingDate(startDate, 2);
+
+            // Assert
+            Assert.AreEqual(result, actualAns);
+
+        }
+
+        [Test]
+        public void GetTaskFinishingDate_WhenWeDeductWholeDaysWithOutDecimals_ShouldReturnTheCorrectFinshingDateAndTime()
+        {
+            //If days are adding this should return 8.00 AM..
+
+            DateTime startDate = new DateTime(2004, 5, 24, 7, 05, 0);
+            DateTime actualAns = new DateTime(2004, 5, 20, 8, 0, 0);
+
+
+            // Act
+            DateTime result = taskPlanner.GetTaskFinishingDate(startDate, -2);
+
+            // Assert
+            Assert.AreEqual(result, actualAns);
+
+        }
+
     }
 }

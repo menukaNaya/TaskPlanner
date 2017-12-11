@@ -194,21 +194,20 @@ namespace TaskPlanner
                     if (hrs >= 0)
                     {
                         start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(workDayStartTime);
-                        //Console.WriteLine(start);
                         start = IsAHoliday(start, hrsAreMinus);
-                        //Console.WriteLine(start);
 
                         for (int i = 0; i < hrs / 8; i++)
                         {
-                            //Console.WriteLine(start);
                             start = start.AddDays(1);
-                            //if()
-                            //{
-                                start = IsAHoliday(start, hrsAreMinus);
-                            //}
-                            //Console.WriteLine(start);
+                            start = IsAHoliday(start, hrsAreMinus);
 
                         }
+
+                        if(hrs%8 == 0)
+                        {
+                            start = start.AddHours(8);
+                        }
+
                         start = start.AddHours(hrs % 8).AddMinutes(min);
                     }
                     else
@@ -216,11 +215,18 @@ namespace TaskPlanner
 
                         start = start.AddHours(-(start.Hour + (24 - (int)(workDayStopTime).TotalHours))).AddMinutes(-start.Minute);
                         start = IsAHoliday(start, hrsAreMinus);
+
                         for (int i = 0; i < -hrs / 8; i++)
                         {
                             start = start.AddDays(-1);
                             start = IsAHoliday(start, hrsAreMinus);
                         }
+
+                        if (hrs % 8 == 0)
+                        {
+                            start = start.AddHours(-8);
+                        }
+
                         start = start.AddHours(hrs % 8).AddMinutes(min);
                         
                     }
@@ -243,7 +249,7 @@ namespace TaskPlanner
 
         static void Main(string[] args)
         {
-            DateTime start = new DateTime(2004, 5, 24, 16, 05, 0);
+            DateTime start = new DateTime(2004, 5, 10, 7, 05, 0);
             TimeSpan s = new TimeSpan (8,0,0);
             TimeSpan e = new TimeSpan(16, 0, 0);
 
@@ -253,7 +259,7 @@ namespace TaskPlanner
             taskPlanner.SetHoliday(new DateTime(2004, 5, 27, 0, 0, 0));
 
             taskPlanner.SetWorkDayStartAndStop(s,e);
-            taskPlanner.GetTaskFinishingDate(start, 2);
+            taskPlanner.GetTaskFinishingDate(start, 2.5);
 
             //awul thiyenne after hour work krnn giyoth kelawenwa..
             //Anika tha ara ude 8 wena eka...
