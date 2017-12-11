@@ -245,25 +245,10 @@ namespace TaskPlanner
 
         }
 
-
-
         static void Main(string[] args)
         {
-            DateTime start = new DateTime(2004, 5, 10, 7, 05, 0);
-            TimeSpan s = new TimeSpan (8,0,0);
-            TimeSpan e = new TimeSpan(16, 0, 0);
-
-            TaskPlanner taskPlanner = new TaskPlanner();
-
-            taskPlanner.SetRecurringHoliday(new DateTime(2004, 5, 17, 0, 0, 0));
-            taskPlanner.SetHoliday(new DateTime(2004, 5, 27, 0, 0, 0));
-
-            taskPlanner.SetWorkDayStartAndStop(s,e);
-            taskPlanner.GetTaskFinishingDate(start, 2.5);
-
-            //awul thiyenne after hour work krnn giyoth kelawenwa..
-            //Anika tha ara ude 8 wena eka...
-            //Ara 4i gaanata patn gnnwanm sn eka...
         }
+
     }
+
 }

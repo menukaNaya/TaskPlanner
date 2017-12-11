@@ -35,6 +35,22 @@ namespace TaskPlanner.Tests
         }
 
         [Test]
+        public void GetTaskFinishingDate_WhenTheTaskIsFinishingOnAWorkDayStart_ShouldReturnTheSameDayStopTime()
+        {
+            // Arrange
+            DateTime startDate = new DateTime(2017, 12, 04, 10, 0, 0);
+            DateTime actualAns = new DateTime(2017, 12, 04, 8, 0, 0);
+
+
+            // Act
+            DateTime result = taskPlanner.GetTaskFinishingDate(startDate, -0.25);
+
+            // Assert
+            Assert.AreEqual(result, actualAns);
+
+        }
+
+        [Test]
         public void GetTaskFinishingDate_WhenTheTaskIsStartingBeforeTheWorkDayBegins_ShouldReturnTheCorrectFinshingDateAndTime()
         {
             // Arrange
