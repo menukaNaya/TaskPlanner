@@ -160,7 +160,6 @@ namespace TaskPlanner
 
             //Finding the number of hours and minutes to add to the starting date...
             int min = start.Minute + (int)((totalNumOfHoursForTheTask - Math.Truncate(totalNumOfHoursForTheTask)) * 60);
-
             //Main logic for finding the finishing date...
             if (hrs >= ((int)(workDayStopTime).TotalHours - start.Hour) || -hrs >= (start.Hour - (int)(workDayStartTime).TotalHours))
             {
@@ -175,7 +174,6 @@ namespace TaskPlanner
                     hrs += (start.Hour-(int)(workDayStartTime).TotalHours);
 
                 }
-
 
                 if (hrs == 0 && min == 0)
                 {
@@ -195,12 +193,15 @@ namespace TaskPlanner
                     {
                         start = start.AddHours(23 - start.Hour).AddMinutes(60 - start.Minute).Add(workDayStartTime);
                         start = IsAHoliday(start, hrsAreMinus);
-
-                        for (int i = 0; i < hrs / 8; i++)
+                        int numberOfCounts = hrs;
+                        for (int i = 0; i < numberOfCounts / 8; i++)
                         {
-                            start = start.AddDays(1);
-                            start = IsAHoliday(start, hrsAreMinus);
-
+                            if(hrs != 8)
+                            {
+                                start = start.AddDays(1);
+                                hrs -= 8;
+                                start = IsAHoliday(start, hrsAreMinus);
+                            }
                         }
 
                         if(hrs%8 == 0)
@@ -218,8 +219,12 @@ namespace TaskPlanner
 
                         for (int i = 0; i < -hrs / 8; i++)
                         {
-                            start = start.AddDays(-1);
-                            start = IsAHoliday(start, hrsAreMinus);
+                            if (hrs != 8)
+                            {
+                                start = start.AddDays(-1);
+                                start = IsAHoliday(start, hrsAreMinus);
+
+                            }
                         }
 
                         if (hrs % 8 == 0)
@@ -247,6 +252,7 @@ namespace TaskPlanner
 
         static void Main(string[] args)
         {
+
         }
 
     }

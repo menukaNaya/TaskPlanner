@@ -153,7 +153,7 @@ namespace TaskPlanner.Tests
 
             // Arrange
             DateTime startDate = new DateTime(2004, 5, 24, 18, 05, 0);
-            DateTime actualAns = new DateTime(2004, 5, 28, 16, 0, 0);
+            DateTime actualAns = new DateTime(2004, 5, 26, 16, 0, 0);
 
 
             // Act
